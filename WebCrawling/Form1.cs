@@ -37,29 +37,19 @@ namespace WebCrawling
 
             string palavra = string.Empty;
             string significados = string.Empty;
-            //String[] listasignificados = new String[20];
             List<string> relacionadas = new List<string>();
             string sinonimos = string.Empty;
-            //string relacionadas = string.Empty;
 
             var sections = htmlDocument.DocumentNode.Descendants("section").Where(node => node.GetAttributeValue("id", "").Equals("mainContent")).ToList();
             foreach (var section in sections)
             {
-                //palavra = section.Descendants("strong").FirstOrDefault().InnerText;
-                ////significados = section.Descendants("section").FirstOrDefault().ChildAttributes("a").FirstOrDefault().Value;
-                //dataGridView1.Rows.Add(palavra);
-
-                var sects = htmlDocument.DocumentNode.Descendants("section").Where(node => node.GetAttributeValue("id", "").Equals("significado")).ToList();
-
-                //int count = 0;
+                 var sects = htmlDocument.DocumentNode.Descendants("section").Where(node => node.GetAttributeValue("id", "").Equals("significado")).ToList();
 
                 foreach (var sec in sects)
                 {
 
                     significados = sec.Descendants("a").FirstOrDefault(x => x.Attributes["class"].Value.Equals("c_primary_hover")).InnerText.Replace("\n", "");
                     dataGridView1.Rows.Add(significados);
-                    //listasignificados[count] = significados;
-                    //count++;
                 }
 
                 var sectis = htmlDocument.DocumentNode.Descendants("section").Where(node => node.GetAttributeValue("id", "").Equals("sinant")).ToList();
@@ -76,8 +66,6 @@ namespace WebCrawling
                 var sect = htmlDocument.DocumentNode.Descendants("section").Where(node => node.GetAttributeValue("id", "").Equals("analogico")).ToList();
                 foreach (var sec in sect)
                 {
-                    //var lis = htmlDocument.DocumentNode.Descendants("ul").Where(node => node.GetAttributeValue("class", "").Equals("tags")).ToList();
-                    //palavra = section.Descendants("strong").FirstOrDefault().InnerText;
                     var lis = sec.Descendants("li").ToList();
                     foreach (var l in lis)
                     {
